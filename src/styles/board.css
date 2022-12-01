@@ -1,0 +1,59 @@
+.board {
+    display: grid;
+    overflow: auto;
+    justify-content: center;
+    grid-template-columns: repeat(9, min(60px, calc(100vw/9)));
+    border: 1px solid black;
+    border-left: 3px solid black;
+    border-top: 3px solid black;
+    border-bottom: 3px solid black;
+}
+
+.value {
+    aspect-ratio: 1/1;
+    border: 1px solid black;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0;
+    color: blue;
+    background-color: transparent;
+    font-size: 1.75rem;
+}
+
+.value.base-line {
+    border-bottom: 3px solid black;
+}
+
+.value:nth-child(3n) {
+    border-right: 3px solid black;
+}
+
+.value:focus {
+    outline: none;
+    border: 1px solid grey;
+}
+
+.value.incorrect {
+    color: red;
+}
+
+.value.default {
+    color: black;
+}
+
+@media (prefers-color-scheme: dark) {
+
+    .board,
+    .value,
+    .value:nth-child(3n),
+    .value.base-line {
+        border-color: white;
+        color: rgb(36, 173, 36);
+    }
+
+    .value.default {
+        color: white;
+    }
+}
