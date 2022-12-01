@@ -32,7 +32,6 @@
 
 .value:focus {
     outline: none;
-    border: 1px solid grey;
 }
 
 .value.incorrect {

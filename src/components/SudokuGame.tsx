@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Board from "../components/Board";
 import {
   getRandomSudoku,
@@ -9,9 +9,15 @@ import "../styles/board.css";
 
 export default function SudokuGame() {
   const MAX_LIVES = 30;
+  const [difficulty, setDifficulty] = useState<
+    "easy" | "medium" | "hard" | "expert" | undefined
+  >(undefined);
   const [lives, setLives] = useState<number>(MAX_LIVES);
-  const [sudoku, setSudoku] = useState<SudokuElement[]>(getRandomSudoku());
-  const solution = solveSudoku(sudoku);
+  const [sudoku, setSudoku] = useState<SudokuElement[]>(
+    getRandomSudoku(difficulty)
+  );
+  const solution = useMemo(() => solveSudoku(sudoku), [sudoku]);
+   
 
   useEffect(() => {
     if (lives <= 0) {
@@ -51,15 +57,35 @@ export default function SudokuGame() {
 
   function reset() {
     setLives(MAX_LIVES);
-    setSudoku(getRandomSudoku());
+    setSudoku(getRandomSudoku(difficulty));
+  }
+
+  function handleDifficultyChange(e: React.ChangeEvent<HTMLSelectElement>) {
+    const newDifficulty = e.target.value;
+    if (
+      newDifficulty === "medium" ||
+      newDifficulty === "hard" ||
+      newDifficulty === "expert" ||
+      newDifficulty === undefined
+    ) {
+      setDifficulty(newDifficulty);
+    }
   }
 
   return (
     <div className="content">
       <h1>SUDOKU</h1>
-      <label>
-        Leben {lives}/{MAX_LIVES}
-      </label>
+      <div className="game-info">
+        <label>
+          Leben {lives}/{MAX_LIVES}
+        </label>
+        <select onChange={handleDifficultyChange}>
+          <option value="easy">Easy</option>
+          <option value="medium">Medium</option>
+          <option value="hard">Hard</option>
+          <option value="expert">Expert</option>
+        </select>
+      </div>
       <Board sudoku={sudoku} solution={solution} handleChange={handleChange} />
       <div className="controls">
         <button className="btn btn-secondary" onClick={reset}>

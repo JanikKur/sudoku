@@ -35,6 +35,15 @@ label {
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    gap: 1rem;
+}
+
+.game-info{
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: space-between;
+    width: 100%;
 }
 
 .btn {
