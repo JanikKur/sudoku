@@ -63,6 +63,7 @@ export default function SudokuGame() {
   function handleDifficultyChange(e: React.ChangeEvent<HTMLSelectElement>) {
     const newDifficulty = e.target.value;
     if (
+      newDifficulty === "easy" ||
       newDifficulty === "medium" ||
       newDifficulty === "hard" ||
       newDifficulty === "expert" ||
