@@ -8,10 +8,10 @@ import {
 import "../styles/board.css";
 
 export default function SudokuGame() {
-  const MAX_LIVES = 30;
+  const MAX_LIVES = 5;
   const [difficulty, setDifficulty] = useState<
     "easy" | "medium" | "hard" | "expert" | undefined
-  >(undefined);
+  >("easy");
   const [lives, setLives] = useState<number>(MAX_LIVES);
   const [sudoku, setSudoku] = useState<SudokuElement[]>(
     getRandomSudoku(difficulty)
@@ -77,10 +77,10 @@ export default function SudokuGame() {
       <h1>SUDOKU</h1>
       <div className="game-info">
         <label>
-          Leben {lives}/{MAX_LIVES}
+          Lives: {lives}
         </label>
         <select onChange={handleDifficultyChange}>
-          <option value="easy">Easy</option>
+          <option value="easy" selected>Easy</option>
           <option value="medium">Medium</option>
           <option value="hard">Hard</option>
           <option value="expert">Expert</option>
